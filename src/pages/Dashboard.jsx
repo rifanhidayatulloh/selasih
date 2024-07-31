@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ReactPaginate from 'react-paginate';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Sidebar from '../components/Sidebar';
 import NavbarAdmin from '../components/NavbarAdmin';
@@ -8,16 +10,38 @@ import { getMovie } from '../redux/actions/movie';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page') || 1;
 
   const allMovie = useSelector(state => {
     return state.getMovie;
   });
 
-  // ------------------------------mounting---------------------
+  // ------------------------Pagination--------------------------------
+  const pageCount = allMovie.data.total_pages || 1;
+  const handlePageClick = ({ selected: selectedPage }) => {
+    const selectPage = selectedPage + 1;
+    let url = '/dashboard';
+
+    if (selectPage) {
+      url += `?page=${selectPage}`;
+    }
+
+    navigate(`${url}`);
+    dispatch(getMovie(selectPage));
+  };
+
   useEffect(() => {
-    dispatch(getMovie());
+    dispatch(getMovie(page));
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    dispatch(getMovie(page));
+    // eslint-disable-next-line
+  }, [page]);
 
   return (
     <>
@@ -29,7 +53,7 @@ const Dashboard = () => {
         <div className="w-80% bg-[#F5F8FA] scrollbar overflow-y-scroll">
           <NavbarAdmin />
 
-          <section className="pr-[50px] pl-4 py-5">
+          <section className="pr-[20px] pl-4 py-5">
             {allMovie?.isLoading ? (
               <div>Loading...</div>
             ) : allMovie?.isError ? (
@@ -74,6 +98,26 @@ const Dashboard = () => {
               </div>
             )}
           </section>
+
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+            containerClassName="flex justify-center space-x-2 my-4"
+            pageClassName="bg-white border border-gray-300 text-gray-800 py-1 px-3 rounded"
+            pageLinkClassName="page-link"
+            previousClassName="bg-white border border-gray-300 text-gray-800 py-1 px-3 rounded"
+            previousLinkClassName="page-link"
+            nextClassName="bg-white border border-gray-300 text-gray-800 py-1 px-3 rounded"
+            nextLinkClassName="page-link"
+            breakClassName="bg-white border border-gray-300 text-gray-800 py-1 px-3 rounded"
+            breakLinkClassName="page-link"
+            activeClassName="!bg-blue-500 !border !border-blue-500 !text-white !py-1 !px-3 !rounded"
+          />
         </div>
       </main>
     </>

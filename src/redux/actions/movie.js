@@ -1,7 +1,7 @@
 import { axiosInterceptors } from '../../utils/axios';
 import { GET_MOVIE_FAILED, GET_MOVIE_PENDING, GET_MOVIE_SUCCESS } from '../types';
 
-export const getMovie = () => async dispatch => {
+export const getMovie = page => async dispatch => {
   try {
     dispatch({
       type: GET_MOVIE_PENDING,
@@ -9,7 +9,7 @@ export const getMovie = () => async dispatch => {
     });
 
     const res = await axiosInterceptors.get(
-      '/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'
+      `/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`
     );
 
     dispatch({

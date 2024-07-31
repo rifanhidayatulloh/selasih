@@ -7,7 +7,7 @@ import Logo from '../assets/images/logo-kementrian-perindustrian.jpg';
 const NavbarAdmin = () => {
   return (
     <>
-      <header className="flex top-0 left-0 right-[14px] items-center justify-between py-4 pl-4 pr-[50px] bg-white shadow z-10">
+      <header className="flex sticky top-0 left-0 right-[14px] items-center justify-between py-4 pl-4 pr-[20px] bg-white shadow z-10">
         <div className="flex items-center">
           <Link to="/">
             <img src={Logo} alt="Kementerian Perindustrian" className="w-[150px]" />
