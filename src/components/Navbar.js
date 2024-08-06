@@ -96,6 +96,11 @@ export default function Navbar() {
                     Agenda
                   </Link>
                 </li>
+                <li>
+                  <Link to="/contoh" className={`${isActive('/contoh')}`}>
+                    Contoh
+                  </Link>
+                </li>
               </ul>
             </div>
 

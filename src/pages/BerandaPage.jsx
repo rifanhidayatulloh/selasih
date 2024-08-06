@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import BannerHero from '../assets/images/banner-hero.png';
 import StandardIndustri from '../components/StandardIndustri';
 import {
+  AlurPengajuan,
   AlurPengajuan1,
   AlurPengajuan2,
   AlurPengajuan3,
@@ -21,6 +22,7 @@ import LogoNabati from '../assets/images/nabati.jpg';
 import LogoLazada from '../assets/images/lazada.jpg';
 import LogoABC from '../assets/images/ptABC.jpg';
 import LogoDanone from '../assets/images/danone.jpg';
+import dataPengajuan from '../assets/dataPengajuan';
 
 const Beranda = () => {
   return (
@@ -294,7 +296,18 @@ const Beranda = () => {
               Alur Pengajuan Sertifikasi Industri Hijau
             </h2>
             <div className="grid grid-cols-12 w-full gap-x-7 gap-y-16">
-              <AlurPengajuan1 />
+              {dataPengajuan.map((item, index) => (
+                <>
+                  <AlurPengajuan
+                    key={index + 1}
+                    nomor={item.nomor}
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                  />
+                </>
+              ))}
+              {/* <AlurPengajuan1 />
               <AlurPengajuan2 />
               <AlurPengajuan3 />
               <AlurPengajuan4 />
@@ -302,7 +315,7 @@ const Beranda = () => {
               <AlurPengajuan7 />
               <AlurPengajuan6 />
               <AlurPengajuan5 />
-              <AlurPengajuan9 />
+              <AlurPengajuan9 /> */}
             </div>
           </div>
         </section>

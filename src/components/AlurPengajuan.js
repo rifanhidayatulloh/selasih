@@ -1,5 +1,25 @@
 import React from 'react';
 
+const AlurPengajuan = ({ nomor, icon, title, description }) => {
+  return (
+    <>
+      <div className="lg:col-span-3 sm:col-span-6 md:col-span-4 col-span-6">
+        <div className="mb-5 w-full flex items-center justify-center">
+          <div className=" relative w-25%">
+            <div className="rounded-full absolute -left-1 -top-5 flex items-center justify-center bg-[#17A39D] size-8 ">
+              <p className="text-white text-center">{nomor}</p>
+            </div>
+
+            <div className="flex items-center justify-center">{icon}</div>
+          </div>
+        </div>
+        <h5 className="text-[#212529] text-[18px] mb-5 text-center font-semibold">{title}</h5>
+        <p className="text-center text-[#212529] px-6">{description}</p>
+      </div>
+    </>
+  );
+};
+
 const AlurPengajuan1 = () => {
   return (
     <>
@@ -341,6 +361,7 @@ const AlurPengajuan9 = () => {
 };
 
 export {
+  AlurPengajuan,
   AlurPengajuan1,
   AlurPengajuan2,
   AlurPengajuan3,

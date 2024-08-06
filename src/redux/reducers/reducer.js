@@ -16,7 +16,7 @@ const NewArticle = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data
+        data: action.payload
       };
     case GET_NEW_ARTICLE_FAILED:
       return {

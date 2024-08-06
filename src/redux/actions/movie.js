@@ -1,4 +1,4 @@
-import { axiosInterceptors } from '../../utils/axios';
+import { apiFunction } from '../../utils/axios';
 import { GET_MOVIE_FAILED, GET_MOVIE_PENDING, GET_MOVIE_SUCCESS } from '../types';
 
 export const getMovie = page => async dispatch => {
@@ -8,7 +8,7 @@ export const getMovie = page => async dispatch => {
       payload: null
     });
 
-    const res = await axiosInterceptors.get(
+    const res = await apiFunction('https://api.themoviedb.org').get(
       `/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`
     );
 

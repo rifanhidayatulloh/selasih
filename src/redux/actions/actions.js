@@ -1,14 +1,15 @@
-import { axiosInterceptors } from '../../utils/axios';
+import { apiFunction } from '../../utils/axios';
 import { GET_NEW_ARTICLE_FAILED, GET_NEW_ARTICLE_PENDING, GET_NEW_ARTICLE_SUCCESS } from '../types';
 
-export const getNewArticle = count => async dispatch => {
+export const getNewArticle = id => async dispatch => {
   try {
     dispatch({
       type: GET_NEW_ARTICLE_PENDING,
       payload: null
     });
 
-    const res = await axiosInterceptors.get(`/api/blog?latest=${count}`);
+    const res = await apiFunction('https://api.themoviedb.org').get(`/3/network/${id}`);
+    // console.log(res);
 
     dispatch({
       type: GET_NEW_ARTICLE_SUCCESS,
@@ -16,7 +17,7 @@ export const getNewArticle = count => async dispatch => {
     });
   } catch (error) {
     if (error.response) {
-      error.message = error.response.data.message;
+      error.message = error.response;
     }
     dispatch({
       type: GET_NEW_ARTICLE_FAILED,
